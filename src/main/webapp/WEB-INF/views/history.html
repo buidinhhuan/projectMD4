@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/history.css}" >
+    <title>history</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 ">
+                <div class="personal">
+                    <div class="avatar">
+                        <img src="https://scontent.fhan4-1.fna.fbcdn.net/v/t39.30808-6/312622124_3261695034144997_4820840115386696616_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_ohc=H0qWYUlor5EAX_F6XRD&_nc_ht=scontent.fhan4-1.fna&oh=00_AfDyQPQlpVkYuvJBJ5r5HxhA3RR4MC1VShlcEzC7oRA0Bw&oe=64E79EFE"
+                            alt="">
+                    </div>
+                    <div class="info">
+                        <div>Bui Dinh Huan</div>
+                        <div><i class="fa-solid fa-pen"></i></div>
+                    </div>
+                </div>
+                <div class="list-icon-item">
+                    <div class="icon-item">
+                        <div class="icon-user">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div>
+                            Thông tin của tôi 
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon-order">
+                        </div>
+                        <div>
+                            Đơn mua hàng
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon-otification">
+                            <i class="fa-regular fa-bell"></i>
+                        </div>
+                        <div>
+                            Thông báo
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon-voucher">
+                            <i class="fa-solid fa-ticket-simple"></i>
+                        </div>
+                        <div>
+                            kho voucher
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-9 ">
+                <ul class="list-status">
+                     <li><a href="#">Tất cả</a></li>
+                     <li><a href="#">Chờ thanh toán</a></li>
+                     <li><a href="#">Vận chuyển </a></li>
+                     <li><a href="#">Giao hàng</a></li>
+                     <li><a href="#">Hoàn thành</a></li>
+                     <li><a href="#">Đã huỷ</a></li>
+                     <li><a href="#">Trả hàng / Hoàn tiền</a></li>
+                </ul>
+                <div class="products">
+                    <div class="list-product">
+                        <div class="item">
+                            <div class="info-item">
+                                <div class="">
+                                    <img src="https://kyo.vn/wp-content/uploads/2022/09/Nuoc-Hoa-Nam-Chanel-Bleu-De-Chanel-EDP-2.jpg"
+                                        alt="">
+                                </div>
+                                <div class="">
+                                    <strong>procduct name :Nước Hoa Nam Chanel Bleu De Chanel EDP</strong>
+                                     <div>quantity : x2</div>
+                                     <div>price : 100 $</div>
+                                </div>
+                            </div>
+                            <div class="status">
+                                Trạng thái  :  Đã huỷ 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-btn">
+                        <div class="total-price"> 
+                            <span><i class="fa-solid fa-money-check-dollar"></i></span>
+                            Thành tiền : 200 $
+                        </div>
+                         <button type="button">Mua lại</button>
+                         <button type="button">Xem chi tiết đơn hàng</button>
+                         <button type="button">Liên hệ với người bán</button>
+                    </div>
+                </div>
+
+                <div class="products">
+                    <div class="list-product">
+                        <div class="item">
+                            <div class="info-item">
+                                <div class="">
+                                    <img src="https://yperfume.net/wp-content/uploads/2021/08/dior-miss-dior-eau-de-toilette-50ml_87fee40a21844e0888015f7379ed56ed_master.jpg"
+                                        alt="">
+                                </div>
+                                <div class="">
+                                    <strong>procduct name :
+                                        Nước Hoa Miss Dior   EDT 100ML
+                                    </strong>
+                                     <div>quantity : x2</div>
+                                     <div>price : 200 $</div>
+                                </div>
+                            </div>
+                            <div class="status">
+                                Trạng thái  : Đã giao 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-btn">
+                        <div class="total-price"> 
+                            <span><i class="fa-solid fa-money-check-dollar"></i></span>
+                            Thành tiền : 400 $
+                        </div>
+                         <button type="button">Mua lại</button>
+                         <button type="button">Xem chi tiết đơn hàng</button>
+                         <button type="button">Liên hệ với người bán</button>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

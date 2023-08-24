@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap');
+
+
+
+
+body {
+  margin-left: 105px;
+  padding: 1em;
+  max-width: 60em;
+  font-family: 'Roboto Mono', sans-serif;
+  line-height: 1.5;
+  color: #2d354c;
+}
+
+.d-flex{
+display: flex;
+align-items: center;
+
+}
+.list-ul{
+  display: flex;
+  gap: 30px;
+  }
+
+  .list-li {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+    font-size: 24px;
+;
+  }
+  .list-li a{
+    text-decoration: none;  
+    color: #2d354c
+  }
+  .fa-cart-shopping:before, .fa-shopping-cart:before {
+    content: "\f07a";
+    font-size: 17px;
+  }
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+th,
+td,
+button,
+input {
+  padding: 0.75em 1em;
+}
+
+ #cart {
+ 
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto 50px;
+ }
+
+table#cart tfoot {
+  background: #eee;
+}
+
+table#cart td,
+table input {
+  border: 1px solid #dadada;
+}
+
+table input[type='number'] {
+  max-width: 4em;
+}
+
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+.btn-success,
+.btn-remove {
+  color: #fff;
+}
+
+.btn-success {
+  background-color: #0d6efd;
+}
+
+.btn-remove {
+  background-color: #dc3545;
+}
+table{
+    text-align: center;
+    width: 100%;
+}
+
+h1,
+h2,
+.calculate-total {
+  text-align: center;
+}
+#total{
+text-align: right !important;
+ }

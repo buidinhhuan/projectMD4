@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/css/cart.css}" >
+  <title>Cart</title>
+</head>
+
+<body>
+  <div class="container-cart">
+    <div class="nav">
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-xl-10  col-lg-10 col-md-10 col-sm-10 h-100 d-flex ">
+            <div class="logo">
+              <img src="https://i.pinimg.com/736x/2f/aa/22/2faa22e78fe13a4b5be289c9bb8ddeba.jpg" width="100px"
+                height="70%">
+            </div>
+            <ul class="list-ul">
+              <ul class="list-li">
+                <li><a th:href="@{home}">Home</a></li>
+                <li><a  th:href="@{productPage}">Product</a></li>
+                 <li><a th:href="@{contact}">Contact</a></li>
+                 <li><a th:href="@{history}">history</a></li>
+              </ul>
+              <ul class="list-li">
+                <li><a href="#">
+                    <i class="fa-solid fa-user-plus"></i>
+                  </a></li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table id="cart" border="1">
+      <thead>
+        <tr>
+          <th>ordinal</th>
+          <th>select</th>
+          <th>Product Name</th>
+          <th>Img</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="product">
+          <td class="stt">
+            <span>1</span>
+          </td>
+          <td class="check-box">
+            <input type="checkbox">
+          </td>
+          <td class="name">
+            <span>Twily</span>
+          </td>
+          <td class="img"><img width="100px" height="100px"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9768xdR2avWAAqJxWWZoMhegTQGafLp0s6Q&usqp=CAU"
+              alt=""></td>
+          <td class="price">$<span>25.00</span></td>
+          <td class="quantity">
+            <input type="number" value="0" min="0" placeholder="Quantity" />
+          </td>
+          <td class="subtotal">$<span>0</span></td>
+          <td class="action">
+            <button class="btn btn-remove">Remove</button>
+          </td>
+        </tr>
+        <tr class="product">
+          <td class="stt">
+            <span>2</span>
+          </td>
+          <td class="check-box">
+            <input type="checkbox">
+          </td>
+          <td class="name">
+            <span>Miss Dior</span>
+          </td>
+          <td class="img"><img width="100px" height="100px"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR75NfmXRdSZNMKmzsyqXJwH9WZsKxxEZ03EQ&usqp=CAU"
+              alt=""></td>
+          <td class="price">$<span>25.00</span></td>
+          <td class="quantity">
+            <input type="number" value="0" min="0" placeholder="Quantity" />
+          </td>
+          <td class="subtotal">$<span>0</span></td>
+          <td class="action">
+            <button class="btn btn-remove">Remove</button>
+          </td>
+        </tr>
+        <tr class="product">
+          <td class="stt">
+            <span>3</span>
+          </td>
+          <td class="check-box">
+            <input type="checkbox">
+          </td>
+          <td class="name">
+            <span>Roja</span>
+          </td>
+          <td class="img"><img width="100px" height="100px"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUIT8ILNbrOxemW02r3GXrl7l2JnPXteI0ZQ&usqp=CAU"
+              alt=""></td>
+          <td class="price">$<span>25.00</span></td>
+          <td class="quantity">
+            <input type="number" value="0" min="0" placeholder="Quantity" />
+          </td>
+          <td class="subtotal">$<span>0</span></td>
+          <td class="action">
+            <button class="btn btn-remove">Remove</button>
+          </td>
+        </tr>
+        <!-- Iteration 2: Add more products here -->
+      </tbody>
+      <tfoot>
+        <tr class="create-product">
+          <td>
+            <input type="text" placeholder="Product Name" />
+          </td>
+          <td>
+            <input type="number" min="0" value="0" placeholder="Product Price" />
+          </td>
+          <td></td>
+          <td></td>
+          <td>
+            <button id="create" class="btn">Create Product</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <div id="total">
+      <p class="calculate-total">
+        <button id="calculate" class="btn btn-success">Calculate Prices</button>
+      </p>
+      <h2 id="total-value">Total: $<span>0</span></h2>
+    </div>
+  </div>
+  <script type="text/javascript" src="./src/index.js"></script>
+</body>
+
+</html>
