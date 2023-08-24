@@ -17,7 +17,7 @@ public class CatalogService implements IGenericService<Catalog, Integer> {
     private final String FINDBYID = "SELECT * FROM CATALOG WHERE ID = ?";
     private final String INSERT = "INSERT INTO  CATALOG( name, status) values(?,?)";
     private final String UPDATE = "UPDATE CATALOG SET name= ?,status=? where id = ?";
-    private final String DELETE = "DELETE  FROM CATALOG WHERE ID = ?";
+    private final String SEARCH = "SELECT *  FROM CATALOG WHERE name like ?";
 
     @Override
     public List<Catalog> findAll() {
@@ -96,4 +96,33 @@ public class CatalogService implements IGenericService<Catalog, Integer> {
     public void delete(Integer id) {
 
     }
+
+
+
+    public List<Catalog> searchByKeyword(String keyword) {
+        List<Catalog> result = new ArrayList<>();
+        Connection conn = null;
+        conn = ConnectDB.getConnection();
+        CallableStatement callSt = null;
+        try {
+            // Sử dụng câu lệnh SQL SELECT với điều kiện LIKE để tìm kiếm theo từ khóa
+             callSt = conn.prepareCall(SEARCH);
+            // Thêm dấu % vào đầu và cuối từ khóa để thực hiện tìm kiếm fuzzy
+            callSt.setString(1, "%" + keyword + "%");
+            ResultSet rs = callSt.executeQuery();
+            while (rs.next()) {
+                Catalog catalog = new Catalog();
+                catalog.setId(rs.getInt("id"));
+                catalog.setName(rs.getString("name"));
+                catalog.setStatus(rs.getBoolean("status"));
+                result.add(catalog);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectDB.closeConnection(conn);
+        }
+        return result;
+    }
+
 }

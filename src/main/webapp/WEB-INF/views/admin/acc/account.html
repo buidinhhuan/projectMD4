@@ -15,13 +15,14 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">product</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/admin/catalog}">product</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">customer</a>
@@ -38,18 +39,24 @@
 <table class="table" >
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">STT</th>
+        <th scope="col">tài khoản</th>
+        <th scope="col">trang thái</th>
+        <th scope="col" colspan="2">hành động</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+    <tr th:each="c, loop : ${account}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${c.username}"></td>
+        <td>
+            <span th:block th:if="${c.status}">hoạt động</span>
+            <span th:block th:unless="${c.status}">đã khoá</span>
+        </td>
+        <td>
+            <a th:href="@{|/admin/unlock_acc/${c.id}|}" class="btn btn-primary btn-sm">unlock</a>
+            <a th:href="@{|/admin/block_acc/${c.id}|}" class="btn  btn-danger  btn-sm">block</a>
+        </td>
     </tr>
     </tbody>
 </table>

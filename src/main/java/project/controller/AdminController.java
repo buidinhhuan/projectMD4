@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import project.dto.ProductDto;
 import project.model.Catalog;
 import project.model.Product;
+import project.model.User;
+import project.service.impl.AccountService;
 import project.service.impl.CatalogService;
 import project.service.impl.ProductService;
 
@@ -25,9 +28,11 @@ public class AdminController {
     private ProductService productService;
     @Autowired
     private CatalogService  catalogService;
+    @Autowired
+    private AccountService accountService;
+
     @Value("${upload-path}")
     private String pathUpload;
-
     @GetMapping()
     public ModelAndView listProduct() {
         List<Product> products = productService.findAll();
@@ -148,5 +153,42 @@ public class AdminController {
         // Chuyển hướng về trang danh sách công việc
         return "redirect:/admin/catalog";
     }
+    @GetMapping("/search_catalog")
+    public String search(@RequestParam(name = "searchKeyword", required = false) String searchKeyword, Model model) {
+        List<Catalog> searchResults;
 
+        if (searchKeyword != null && !searchKeyword.isEmpty()) {
+            // Gọi phương thức tìm kiếm từ dịch vụ dựa trên keyword
+            searchResults = catalogService.searchByKeyword(searchKeyword);
+        } else {
+            // Nếu keyword rỗng hoặc null, hiển thị danh sách toàn bộ danh
+            searchResults = catalogService.findAll();
+        }
+
+        // Thêm kết quả tìm kiếm vào model để truyền đến view
+        model.addAttribute("catalogs", searchResults);
+        model.addAttribute("keyword", searchKeyword); // Để giữ lại keyword trên giao diện tìm kiếm
+
+        return "redirect:/admin/catalog"; // Trả về tên view để hiển thị kết quả
+    }
+
+
+
+    //    ********************  Phần quản lý tài khoản  ******************
+    @GetMapping("/account")
+    public ModelAndView listAcc() {
+        List<User> users = accountService.findAll();
+        ModelAndView modelAndView = new ModelAndView("admin/acc/account", "account", users);
+        return modelAndView;
+    }
+    @GetMapping("/unlock_acc/{id}")
+    public String unlockAcc(@PathVariable("id") Integer id){
+        accountService.updateStatusAcc(id,true);
+        return "redirect:/admin/account";
+    }
+    @GetMapping("/block_acc/{id}")
+    public String blockAcc(@PathVariable("id") Integer id){
+        accountService.updateStatusAcc(id,false);
+        return "redirect:/admin/account";
+    }
 }

@@ -36,10 +36,12 @@ public class HomeController {
         // checkk validate
          // tao mois user
         User user = userService.login(formLoginDto);
+        session.setAttribute("userlogin",user);
         if(user == null){
             return "redirect:/form-login";
+        } else if  (user.getRoleId()==1) {
+            return "redirect:/admin";
         }
-        session.setAttribute("userlogin",user);
         return "redirect:/";
     }
    @GetMapping("/logout")
