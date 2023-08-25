@@ -34,10 +34,12 @@ public class AdminController {
     @Value("${upload-path}")
     private String pathUpload;
     @GetMapping()
-    public ModelAndView listProduct() {
+    public String listProduct(Model model) {
         List<Product> products = productService.findAll();
-        ModelAndView modelAndView = new ModelAndView("admin/listProduct", "products", products);
-        return modelAndView;
+        List<Catalog> list = catalogService.findAll();
+        model.addAttribute("listCatalog",list);
+        model.addAttribute("products", products);
+        return "admin/listProduct";
     }
 
 
@@ -49,10 +51,10 @@ public class AdminController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView edit(@PathVariable("id") int id) {
+    public String edit(@PathVariable("id") int id,Model model) {
         Product product = productService.findById(id);
-        ModelAndView modelAndView = new ModelAndView("admin/editProduct", "product", product);
-        return modelAndView;
+        model.addAttribute("product",product);
+        return "admin/editProduct";
     }
     @PostMapping("/edit")
     public String update(@ModelAttribute("product") ProductDto productDto) {
@@ -83,11 +85,15 @@ public class AdminController {
     }
 
     @GetMapping("/add")
-    public ModelAndView upload() {
-        return new ModelAndView("admin/addProduct","product",new ProductDto());
+    public String upload() {
+        return "admin/listProduct";
+    }
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "admin/dashboard";
     }
     @PostMapping("/add")
-    public  String doUpload(@ModelAttribute("product") ProductDto productDto){
+    public  String doUpload(@ModelAttribute ProductDto productDto){
         // upload file
         File file =new File(pathUpload);
         if(!file.exists()){
@@ -127,7 +133,7 @@ public class AdminController {
     @GetMapping("/add_catalog")
     public ModelAndView add() {
         // Tạo ModelAndView để hiển thị form thêm mới trong view "/admin/ctl/add_catalog"
-        ModelAndView modelAndView = new ModelAndView("/admin/ctl/add_catalog" ,"catalog" ,new Catalog());
+        ModelAndView modelAndView = new ModelAndView("/admin/ctl/catalog" ,"catalog" ,new Catalog());
         return modelAndView;
     }
 
