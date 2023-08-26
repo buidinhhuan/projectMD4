@@ -47,9 +47,16 @@
                                     </button>
                                 </form>
                             </li>
-                            <li><a th:href="@{login}">login</a></li>
-                            <li><a th:href="@{register}">register</a></li>
-                            <li><a th:href="@{cart}">
+                            <li><a th:href="@{/form-login}" th:if="${session.userlogin}==null" th:text="Login"></a>
+                            </li>
+                            <li><a th:href="@{/form-register}" th:if="${session.userlogin}==null"
+                                   th:text="Register"></a></li>
+                            <li><a th:href="@{/form-login}" th:if="${session.userlogin}!=null"
+                                   th:text="${session.userlogin.username}"></a></li>
+                            <li><a th:href="@{/logout}" th:if="${session.userlogin}!=null"
+                                   th:text="Logout">
+                            </a></li>
+                            <li><a th:href="@{/cart}">
                                 <div><i class="fa-solid fa-cart-shopping"></i></div>
                             </a></li>
                             <li><a th:href="@{/}">

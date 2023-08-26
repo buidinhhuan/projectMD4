@@ -42,7 +42,10 @@ public class AdminController {
         return "admin/listProduct";
     }
 
-
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "admin/dashboard";
+    }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         // Xóa sản phẩm dựa trên ID
@@ -53,6 +56,8 @@ public class AdminController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") int id,Model model) {
         Product product = productService.findById(id);
+        List<Catalog> list = catalogService.findAll();
+        model.addAttribute("listCatalog",list);
         model.addAttribute("product",product);
         return "admin/editProduct";
     }
@@ -88,10 +93,7 @@ public class AdminController {
     public String upload() {
         return "admin/listProduct";
     }
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "admin/dashboard";
-    }
+
     @PostMapping("/add")
     public  String doUpload(@ModelAttribute ProductDto productDto){
         // upload file
@@ -141,7 +143,7 @@ public class AdminController {
     public String add(@ModelAttribute("catalog") Catalog catalog) {
         // Lưu thông tin công việc mới
         catalogService.save(catalog);
-        // Chuyển hướng về trang danh sách công việc
+        // Chuyển hướng về trang danh sách danh muc
         return "redirect:/admin/catalog";
     }
     @GetMapping("/edit_catalog/{id}")

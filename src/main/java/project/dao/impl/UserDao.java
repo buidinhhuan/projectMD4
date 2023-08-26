@@ -153,9 +153,7 @@ public class UserDao implements IGenericDao<User, Long> {
                 user.setId(rs.getLong("id")); // Lấy giá trị cột "id" từ kết quả và đặt vào thuộc tính id của đối tượng User
                 user.setUsername(rs.getString("username")); // Lấy giá trị cột "username" từ kết quả và đặt vào thuộc tính username của đối tượng User
                 user.setPassword(rs.getString("password")); // Lấy giá trị cột "password" từ kết quả và đặt vào thuộc tính password của đối tượng User
-//                user.setFullName(rs.getString("full_name")); // Lấy giá trị cột "full_name" từ kết quả và đặt vào thuộc tính fullName của đối tượng User
-//                user.setAvatar(rs.getString("avatar")); // Lấy giá trị cột "avatar" từ kết quả và đặt vào thuộc tính avatar của đối tượng User
-//                user.setRoleId(rs.getLong("role_id")); // Lấy giá trị cột "role_id" từ kết quả và đặt vào thuộc tính roleId của đối tượng User
+                user.setRoleId(rs.getLong("role_id")); // Lấy giá trị cột "role_id" từ kết quả và đặt vào thuộc tính roleId của đối tượng User
             }
         } catch (SQLException e) {
             throw new RuntimeException(e); // Xử lý ngoại lệ nếu có lỗi xảy ra và ném một ngoại lệ mới có thông tin lỗi

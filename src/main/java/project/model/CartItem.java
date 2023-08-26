@@ -1,14 +1,13 @@
 package project.model;
-
-public class Cart {
+public class CartItem {
     private int id;
     private Product product;
-    private  String quantity;
+    private int quantity;
 
-    public Cart() {
+    public CartItem() {
     }
 
-    public Cart(int id, Product product, String quantity) {
+    public CartItem(int id, Product product, int quantity) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
@@ -30,11 +29,11 @@ public class Cart {
         this.product = product;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

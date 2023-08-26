@@ -2,148 +2,172 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" th:href="@{/css/cart.css}" >
-  <title>Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+          integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <title>CartItem</title>
 </head>
 
 <body>
-  <div class="container-cart">
+<div class="container-cart">
     <div class="nav">
-      <div class="container h-100">
-        <div class="row h-100">
-          <div class="col-xl-10  col-lg-10 col-md-10 col-sm-10 h-100 d-flex ">
-            <div class="logo">
-              <img src="https://i.pinimg.com/736x/2f/aa/22/2faa22e78fe13a4b5be289c9bb8ddeba.jpg" width="100px"
-                height="70%">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-xl-10  col-lg-10 col-md-10 col-sm-10 h-100 d-flex ">
+                    <div class="logo">
+                        <img src="https://i.pinimg.com/736x/2f/aa/22/2faa22e78fe13a4b5be289c9bb8ddeba.jpg" width="100%"
+                             height="70%">
+                    </div>
+                    <ul class="list-ul">
+                        <ul class="list-li">
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{productPage}">Product</a></li>
+                            <li><a th:href="@{contact}">Contact</a></li>
+                            <li><a th:href="@{history}">history</a></li>
+                        </ul>
+                        <ul class="list-li">
+                            <li class="control">
+                                <form action="" method="post" class="search">
+                                    <input type="text" class="search__input" placeholder="Enter to search">
+                                    <button class="search__button">
+                                        <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                                            <g>
+                                                <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </li>
+                            <li><a th:href="@{/form-login}" th:if="${session.userlogin}==null" th:text="Login"></a>
+                            </li>
+                            <li><a th:href="@{/form-register}" th:if="${session.userlogin}==null"
+                                   th:text="Register"></a></li>
+                            <li><a th:href="@{/form-login}" th:if="${session.userlogin}!=null"
+                                   th:text="${session.userlogin.username}"></a></li>
+                            <li><a th:href="@{/logout}" th:if="${session.userlogin}!=null"
+                                   th:text="Logout">
+                            </a></li>
+                            <li><a th:href="@{/cart}">
+                                <div><i class="fa-solid fa-cart-shopping"></i></div>
+                            </a></li>
+                            <li><a href="#">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </a></li>
+                        </ul>
+                    </ul>
+                </div>
             </div>
-            <ul class="list-ul">
-              <ul class="list-li">
-                <li><a th:href="@{home}">Home</a></li>
-                <li><a  th:href="@{productPage}">Product</a></li>
-                 <li><a th:href="@{contact}">Contact</a></li>
-                 <li><a th:href="@{history}">history</a></li>
-              </ul>
-              <ul class="list-li">
-                <li><a href="#">
-                    <i class="fa-solid fa-user-plus"></i>
-                  </a></li>
-              </ul>
-            </ul>
-          </div>
         </div>
-      </div>
     </div>
-    <table id="cart" border="1">
-      <thead>
-        <tr>
-          <th>ordinal</th>
-          <th>select</th>
-          <th>Product Name</th>
-          <th>Img</th>
-          <th>Unit Price</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="product">
-          <td class="stt">
-            <span>1</span>
-          </td>
-          <td class="check-box">
-            <input type="checkbox">
-          </td>
-          <td class="name">
-            <span>Twily</span>
-          </td>
-          <td class="img"><img width="100px" height="100px"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9768xdR2avWAAqJxWWZoMhegTQGafLp0s6Q&usqp=CAU"
-              alt=""></td>
-          <td class="price">$<span>25.00</span></td>
-          <td class="quantity">
-            <input type="number" value="0" min="0" placeholder="Quantity" />
-          </td>
-          <td class="subtotal">$<span>0</span></td>
-          <td class="action">
-            <button class="btn btn-remove">Remove</button>
-          </td>
-        </tr>
-        <tr class="product">
-          <td class="stt">
-            <span>2</span>
-          </td>
-          <td class="check-box">
-            <input type="checkbox">
-          </td>
-          <td class="name">
-            <span>Miss Dior</span>
-          </td>
-          <td class="img"><img width="100px" height="100px"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR75NfmXRdSZNMKmzsyqXJwH9WZsKxxEZ03EQ&usqp=CAU"
-              alt=""></td>
-          <td class="price">$<span>25.00</span></td>
-          <td class="quantity">
-            <input type="number" value="0" min="0" placeholder="Quantity" />
-          </td>
-          <td class="subtotal">$<span>0</span></td>
-          <td class="action">
-            <button class="btn btn-remove">Remove</button>
-          </td>
-        </tr>
-        <tr class="product">
-          <td class="stt">
-            <span>3</span>
-          </td>
-          <td class="check-box">
-            <input type="checkbox">
-          </td>
-          <td class="name">
-            <span>Roja</span>
-          </td>
-          <td class="img"><img width="100px" height="100px"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUIT8ILNbrOxemW02r3GXrl7l2JnPXteI0ZQ&usqp=CAU"
-              alt=""></td>
-          <td class="price">$<span>25.00</span></td>
-          <td class="quantity">
-            <input type="number" value="0" min="0" placeholder="Quantity" />
-          </td>
-          <td class="subtotal">$<span>0</span></td>
-          <td class="action">
-            <button class="btn btn-remove">Remove</button>
-          </td>
-        </tr>
-        <!-- Iteration 2: Add more products here -->
-      </tbody>
-      <tfoot>
-        <tr class="create-product">
-          <td>
-            <input type="text" placeholder="Product Name" />
-          </td>
-          <td>
-            <input type="number" min="0" value="0" placeholder="Product Price" />
-          </td>
-          <td></td>
-          <td></td>
-          <td>
-            <button id="create" class="btn">Create Product</button>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-    <div id="total">
-      <p class="calculate-total">
-        <button id="calculate" class="btn btn-success">Calculate Prices</button>
-      </p>
-      <h2 id="total-value">Total: $<span>0</span></h2>
+    <div class="main-cart">
+        <div class="row">
+            <div class="col  ">
+            </div>
+            <div class="col-4">
+                <input type="checkbox" name="" id="checkbox">
+                <label for="checkbox">Sản phẩm</label>
+            </div>
+
+            <div class="col-6">
+                <div class="title-table">
+                    <div>Đơn giá</div>
+                    <div>Số lương</div>
+                    <div>Thành tiền</div>
+                    <div>Thao tác</div>
+                </div>
+            </div>
+
+            <div class="col ">
+            </div>
+        </div>
+        <div class="row" th:each="ci,loop : ${session.cart}">
+            <div class="col ">
+            </div>
+            <div class="col-10 ">
+                <!--      ******* Sản phẩm trong giỏ hàng-->
+                <form th:action="@{'/cart/update/'+${ci.id}}" method="post">
+                    <div class="body-item">
+                        <input type="checkbox" name="" id="checkbox">
+                        <div class="style-img">
+                            <img width="100px" height="100px" th:src="'/image/'+${ci.product.img_url}" alt="">
+                        </div>
+                        <div class="name-pro" th:text="${ci.product.name}"></div>
+                        <div class="price-pro" th:text="${ci.product.price + '$'}">100 $</div>
+                        <input type="number" class="qunatity" th:value="${ci.quantity}" name="quantity"
+                               placeholder="số lượng">
+                        <div class="total-mount" th:text="${ci.product.price*ci.quantity +' $'}"></div>
+                        <div>
+                            <button type="submit" class="btn btn-warning">update</button>
+                            <a href="#" class="btn btn-danger" onclick="return confirm('Bạn có muốnn xóa không')"
+                               th:href="@{'/cart/delete/'+${ci.id}}">delete</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-10 " >
+                <div class="check-out">
+                    <h4 class="total" th:text="${'Tổng tiền: '+ total +' $'}">
+                    </h4>
+                    <div class="btn-check-out">
+                        <a href="#" class="btn  btn-primary">Thanh toán</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
     </div>
-  </div>
-  <script type="text/javascript" src="./src/index.js"></script>
+    <!-- Modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Checkout
+    </button>
+    <form action="/orderController/create" method="post">
+        <div class="modal fade" id="eordersxampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label>số điện thoại</label>
+                            <input type="text" name="phone">
+                        </div>
+                        <div>
+                            <label>Địa chỉ</label>
+                            <input type="text" name="address">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        referrerpolicy="no-referrer"></script>
+<script src="assets/js/script.js"></script>
 </body>
 
 </html>

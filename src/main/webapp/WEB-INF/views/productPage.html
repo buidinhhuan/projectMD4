@@ -51,9 +51,16 @@
                                 </form>
                             </li>
 
-                            <li><a th:href="@{login}">login</a></li>
-                            <li><a th:href="@{register}">register</a></li>
-                            <li><a th:href="@{cart}">
+                            <li><a th:href="@{/form-login}" th:if="${session.userlogin}==null" th:text="Login"></a>
+                            </li>
+                            <li><a th:href="@{/form-register}" th:if="${session.userlogin}==null"
+                                   th:text="Register"></a></li>
+                            <li><a th:href="@{/form-login}" th:if="${session.userlogin}!=null"
+                                   th:text="${session.userlogin.username}"></a></li>
+                            <li><a th:href="@{/logout}" th:if="${session.userlogin}!=null"
+                                   th:text="Logout">
+                            </a></li>
+                            <li><a th:href="@{/cart}">
                                 <div><i class="fa-solid fa-cart-shopping"></i></div>
                             </a></li>
                             <li><a th:href="@{/}">
@@ -74,15 +81,15 @@
         <div class="row">
             <div class="col-lg-2">
                 <div class="left-imgs">
-                    <img th:src="@{/img/bozsol1.webp}" alt="" class="one">
-                    <img th:src="@{/img/bozsol-3.webp}" alt="" class="three">
-                    <img th:src="@{/img/bozsol1.webp}" alt="" class="two">
+                    <img  src="https://cdn.vuahanghieu.com/unsafe/500x0/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2022/06/nuoc-hoa-nu-jean-paul-gaultier-scandal-edp-80ml-62ac5373e3716-17062022171203.jpg" alt="" class="one">
+                    <img  src="https://cdn.vuahanghieu.com/unsafe/0x250/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2022/09/nuoc-hoa-nu-jean-paul-gaultier-scandal-edp-80ml-632d0f3af1471-23092022084322.jpg" alt="" class="three">
+                    <img  src="https://cdn.vuahanghieu.com/unsafe/0x250/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2022/11/nuoc-hoa-nu-jean-paul-gaultier-scandal-gold-eau-de-parfum-80ml-6369b446170b3-08112022084334.jpg" alt="" class="two">
 
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="product-img">
-                    <img th:src="@{/img/boz1.webp}" width="100%" height="100%" class="main">
+                    <img src="https://www.oca.edu.vn/uploads/images/info/nuoc-hoa-trong-tieng-trung-la-gi.png" width="100%" height="100%" class="main">
                 </div>
             </div>
             <div class="col-lg-5">
@@ -117,8 +124,8 @@
                     <div class="img-text">
                         <h5 th:text="${p.name}" ></h5>
                         <h6 th:text="${p.price}"></h6>
-                        <a >
-                            <i class="fa-solid fa-eye"></i>
+                        <a th:href="@{|/cart/addToCart/${p.id}|}">
+                            <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                     </div>
                 </div>

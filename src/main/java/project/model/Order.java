@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private  int id ;
+    private  Long id ;
+    private int user_id;
     private  double total_price;
     private  String receiver;
     private  String phoneNumber;
@@ -13,14 +14,15 @@ public class Order {
     private  String address;
     private boolean status = true ;
     private Date buyDate = new Date();
-    private List<Cart> orderDetail = new ArrayList<>();
+    private List<CartItem> orderDetail = new ArrayList<>();
     private Pay pay;
 
     public Order() {
     }
 
-    public Order(int id, double total_price, String receiver, String phoneNumber, String email, String address, boolean status, Date buyDate, List<Cart> orderDetail, Pay pay) {
+    public Order(Long id, int user_id, double total_price, String receiver, String phoneNumber, String email, String address, boolean status, Date buyDate, List<CartItem> orderDetail, Pay pay) {
         this.id = id;
+        this.user_id = user_id;
         this.total_price = total_price;
         this.receiver = receiver;
         this.phoneNumber = phoneNumber;
@@ -32,12 +34,20 @@ public class Order {
         this.pay = pay;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public double getTotal_price() {
@@ -96,11 +106,11 @@ public class Order {
         this.buyDate = buyDate;
     }
 
-    public List<Cart> getOrderDetail() {
+    public List<CartItem> getOrderDetail() {
         return orderDetail;
     }
 
-    public void setOrderDetail(List<Cart> orderDetail) {
+    public void setOrderDetail(List<CartItem> orderDetail) {
         this.orderDetail = orderDetail;
     }
 

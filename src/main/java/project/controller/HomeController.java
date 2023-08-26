@@ -1,5 +1,4 @@
 package project.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +9,8 @@ import project.model.Product;
 import project.model.User;
 import project.service.impl.ProductService;
 import project.service.impl.UserService;
-
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,17 +35,20 @@ public class HomeController {
         // checkk validate
          // tao mois user
         User user = userService.login(formLoginDto);
-        session.setAttribute("userlogin",user);
-        if(user == null){
+        if(user == null) {
             return "redirect:/form-login";
-        } else if  (user.getRoleId()==1) {
+        }
+        session.setAttribute("userlogin",user);
+        if (user.getRoleId()==1){
             return "redirect:/admin";
         }
+        session.setAttribute("cart",new ArrayList<>());
         return "redirect:/";
     }
    @GetMapping("/logout")
    public String logout(HttpSession session){
        session.removeAttribute("userlogin");
+      session.setAttribute("cart",null);
        return "redirect:/";
    }
     @GetMapping("/form-register")
@@ -101,8 +103,4 @@ public class HomeController {
         return "history";
     }
 
-    @GetMapping({"cart"})
-    public String cart() {
-        return "cart";
-    }
 }
