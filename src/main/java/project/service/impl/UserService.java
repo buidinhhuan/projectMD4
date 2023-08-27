@@ -25,10 +25,12 @@ public class UserService  {
     public void save(FormRegisterDto formRegisterDto) {
         // chuyen doi dto sang model
         User user = new User();
+        user.setId(formRegisterDto.getId());
         user.setUsername(formRegisterDto.getUsername());
         user.setPassword(formRegisterDto.getPassword());
         user.setEmail(formRegisterDto.getEmail());
-        userDao.save(user);
+        user.setStatus(formRegisterDto.isStatus());
+         userDao.save(user);
     }
 
 

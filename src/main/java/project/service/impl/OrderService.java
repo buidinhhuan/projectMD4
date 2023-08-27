@@ -1,21 +1,49 @@
 package project.service.impl;
-
 import org.springframework.stereotype.Service;
 import project.model.Order;
-import project.model.Product;
-import project.service.IGenericService;
+ import project.service.IGenericService;
 import project.util.ConnectDB;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class OrderService  implements IGenericService<Order ,Integer> {
     private final String FINDALL = "SELECT * FROM ORDERS";
+    private final String INSERT = "INSERT INTO ORDERS(id_user, phoneNumber, address,totalPrice, status, dateBuy) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String FIND_BY_USER_ID = "SELECT * FROM ORDERS WHERE id_user = ?";
+    public List<Order> findByUserId(int userId) {
+        List<Order> list = new ArrayList<>();
+        Connection conn = null;
+
+        try {
+            conn = ConnectDB.getConnection();
+            CallableStatement callSt = conn.prepareCall(FIND_BY_USER_ID);
+            callSt.setInt(1, userId);
+            ResultSet rs = callSt.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getLong("id"));
+                order.setUser_id(rs.getInt("id_user"));
+                order.setReceiver(rs.getString("receiver"));
+                order.setPhoneNumber(rs.getString("phoneNumber"));
+                order.setAddress(rs.getString("address"));
+                order.setTotal_price(rs.getInt("totalPrice"));
+                order.setStatus(rs.getBoolean("status"));
+                order.setBuyDate(rs.getDate("dateBuy"));
+                // Add the order to the list
+                list.add(order);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectDB.closeConnection(conn);
+        }
+
+        return list;
+    }
 
     @Override
     public List<Order> findAll() {
@@ -31,10 +59,9 @@ public class OrderService  implements IGenericService<Order ,Integer> {
                 Order order = new Order();
                 order.setId(rs.getLong("id"));
                 order.setUser_id(rs.getInt(" id_user"));
-                order.setReceiver(rs.getString("receiver "));
-                order.setPhoneNumber(rs.getString(" phoneNumber"));
-                order.setEmail(rs.getString("email"));
-                order.setAddress(rs.getString(" address"));
+                order.setReceiver(rs.getString("receiver"));
+                order.setPhoneNumber(rs.getString("phoneNumber"));
+                order.setAddress(rs.getString("address"));
                 order.setTotal_price(rs.getInt("totalPrice"));
                 order.setStatus(rs.getBoolean("status"));
                 order.setBuyDate(rs.getDate("dateBuy"));
@@ -58,12 +85,32 @@ public class OrderService  implements IGenericService<Order ,Integer> {
     }
 
     @Override
-    public void save(Order order) {
+    public long save(Order order) {
+        Connection conn = null;
+        conn = ConnectDB.getConnection();
+        try {
+            CallableStatement callSt = conn.prepareCall(INSERT);
 
+            callSt.setInt(1, order.getUser_id());
+            callSt.setString(2, order.getPhoneNumber());
+             callSt.setString(3, order.getAddress());
+            callSt.setDouble(4, order.getTotal_price());
+            callSt.setBoolean(5, order.isStatus());
+            callSt.setDate(6, new Date(order.getBuyDate().getTime()));
+            callSt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            ConnectDB.closeConnection(conn);
+        }
+        return order.getUser_id();
     }
 
     @Override
     public void delete(Integer id) {
 
     }
+
+
 }

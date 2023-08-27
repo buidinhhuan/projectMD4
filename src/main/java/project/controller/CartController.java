@@ -3,10 +3,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import project.dto.UserLogin;
 import project.model.CartItem;
 import project.model.Product;
 import project.service.impl.CartService;
 import project.service.impl.ProductService;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ public class CartController {
         model.addAttribute("total", total);
         return "cart";
     }
+
     @GetMapping("/addToCart/{idPro}")
     public String addToCart(@PathVariable("idPro") int idPro, HttpSession session) {
         List<Product> products = productService.findAll();

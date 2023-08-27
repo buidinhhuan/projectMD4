@@ -23,7 +23,7 @@
                             alt="">
                     </div>
                     <div class="info">
-                        <div>Bui Dinh Huan</div>
+                        <div th:text="${session.userlogin.username}"></div>
                         <div><i class="fa-solid fa-pen"></i></div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                      <li><a href="#">Đã huỷ</a></li>
                      <li><a href="#">Trả hàng / Hoàn tiền</a></li>
                 </ul>
-                <div class="products">
+                <div class="products" th:each="o : ${orders}">
                     <div class="list-product">
                         <div class="item">
                             <div class="info-item">
@@ -87,53 +87,19 @@
                                      <div>price : 100 $</div>
                                 </div>
                             </div>
-                            <div class="status">
-                                Trạng thái  :  Đã huỷ 
-                            </div>
+                            <div class="status" th:field="${o.status}" ></div>
                         </div>
                     </div>
                     <div class="list-btn">
-                        <div class="total-price"> 
-                            <span><i class="fa-solid fa-money-check-dollar"></i></span>
-                            Thành tiền : 200 $
+                        <div class="total-price" th:field="${o.total_price}">
+                            <span>
+                                <i class="fa-solid fa-money-check-dollar"></i>
+                            </span>
                         </div>
                          <button type="button">Mua lại</button>
                          <button type="button">Xem chi tiết đơn hàng</button>
                          <button type="button">Liên hệ với người bán</button>
                     </div>
-                </div>
-
-                <div class="products">
-                    <div class="list-product">
-                        <div class="item">
-                            <div class="info-item">
-                                <div class="">
-                                    <img src="https://yperfume.net/wp-content/uploads/2021/08/dior-miss-dior-eau-de-toilette-50ml_87fee40a21844e0888015f7379ed56ed_master.jpg"
-                                        alt="">
-                                </div>
-                                <div class="">
-                                    <strong>procduct name :
-                                        Nước Hoa Miss Dior   EDT 100ML
-                                    </strong>
-                                     <div>quantity : x2</div>
-                                     <div>price : 200 $</div>
-                                </div>
-                            </div>
-                            <div class="status">
-                                Trạng thái  : Đã giao 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-btn">
-                        <div class="total-price"> 
-                            <span><i class="fa-solid fa-money-check-dollar"></i></span>
-                            Thành tiền : 400 $
-                        </div>
-                         <button type="button">Mua lại</button>
-                         <button type="button">Xem chi tiết đơn hàng</button>
-                         <button type="button">Liên hệ với người bán</button>
-                    </div>
-    
                 </div>
             </div>
         </div>

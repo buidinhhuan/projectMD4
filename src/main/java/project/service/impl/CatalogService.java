@@ -68,7 +68,7 @@ public class CatalogService implements IGenericService<Catalog, Integer> {
     }
 
     @Override
-    public void save(Catalog catalog) {
+    public long save(Catalog catalog) {
         Connection conn = null;
         conn = ConnectDB.getConnection();
         try {
@@ -89,6 +89,7 @@ public class CatalogService implements IGenericService<Catalog, Integer> {
         }finally {
             ConnectDB.closeConnection(conn);
         }
+        return 0;
     }
 
 

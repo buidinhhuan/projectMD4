@@ -5,13 +5,14 @@ import project.model.CartItem;
 import project.service.IGenericService;
 
 import java.util.List;
-
+@Service
 public class CartService implements IGenericService<CartItem,Integer> {
     private List<CartItem> cart;
 
     public CartService(List<CartItem> cart) {
         this.cart = cart;
     }
+
 
     public void setCart(List<CartItem> cart) {
         this.cart = cart;
@@ -33,7 +34,7 @@ public class CartService implements IGenericService<CartItem,Integer> {
     }
 
     @Override
-    public void save(CartItem cartItem) {
+    public long save(CartItem cartItem) {
         if(findById(cartItem.getId())==null){
             // thêm mới
             cart.add(cartItem);
@@ -41,6 +42,7 @@ public class CartService implements IGenericService<CartItem,Integer> {
             // cập nhật
             cart.set(cart.indexOf(findById(cartItem.getId())),cartItem);
         }
+        return 0;
     }
 
     @Override

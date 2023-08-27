@@ -40,9 +40,15 @@ public class HomeController {
         }
         session.setAttribute("userlogin",user);
         if (user.getRoleId()==1){
+            System.out.println("chao mừng bạn đến  với trang admin");
             return "redirect:/admin";
         }
+        if (user != null && user.isStatus()==false){
+            System.err.println("tai khoan cua ban da bi khoa");
+            return  "redirect:/form-register";
+        }
         session.setAttribute("cart",new ArrayList<>());
+        System.out.println("bạn đã đăng nhập thành công");
         return "redirect:/";
     }
    @GetMapping("/logout")
@@ -78,12 +84,6 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("productPage", "products", products);
         return modelAndView;
     }
-
-    @GetMapping({"productDetail"})
-    public String productDetail() {
-        return "productDetail";
-    }
-
     @GetMapping({"contact"})
     public String contact() {
         return "contact";
@@ -98,9 +98,5 @@ public class HomeController {
         return "forgot";
     }
 
-    @GetMapping({"history"})
-    public String history() {
-        return "history";
-    }
 
 }

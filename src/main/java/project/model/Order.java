@@ -34,6 +34,11 @@ public class Order {
         this.pay = pay;
     }
 
+    public Order(Long id, String phoneNumber, String address) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
     public Long getId() {
         return id;
     }

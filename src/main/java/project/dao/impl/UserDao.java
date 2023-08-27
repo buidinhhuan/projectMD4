@@ -19,7 +19,7 @@ import java.util.List;
 public class UserDao implements IGenericDao<User, Long> {
     private final String FINDALL = "SELECT * FROM USERS";
     private final String FINDBYID = "SELECT * FROM USERS WHERE ID = ?";
-     private final String INSERT = "INSERT INTO  USERS(username,email,password,role_id) values(?,?,?,?)";
+     private final String INSERT = "INSERT INTO  USERS(username,email,password,status,role_id) values(?,?,?,?,?)";
     private final String UPDATE = "UPDATE USERS full_name=?, avatar=? where id = ?";
     private final String DELETE = "DELETE  FROM USERS WHERE ID =?";
     private final String LOGIN = "SELECT * FROM USERS WHERE username = ? and password = ?";
@@ -66,7 +66,8 @@ public class UserDao implements IGenericDao<User, Long> {
                 callSt.setString(1, user.getUsername());
                 callSt.setString(2, user.getEmail());
                 callSt.setString(3, user.getPassword());
-                callSt.setLong(4, user.getRoleId());
+                callSt.setBoolean(4, user.isStatus());
+                callSt.setLong(5, user.getRoleId());
                 // Thực thi câu lệnh SQL để thêm mới
                 callSt.executeUpdate();
             } else {
@@ -153,6 +154,7 @@ public class UserDao implements IGenericDao<User, Long> {
                 user.setId(rs.getLong("id")); // Lấy giá trị cột "id" từ kết quả và đặt vào thuộc tính id của đối tượng User
                 user.setUsername(rs.getString("username")); // Lấy giá trị cột "username" từ kết quả và đặt vào thuộc tính username của đối tượng User
                 user.setPassword(rs.getString("password")); // Lấy giá trị cột "password" từ kết quả và đặt vào thuộc tính password của đối tượng User
+                user.setStatus(rs.getBoolean("status")); // Lấy giá trị cột "password" từ kết quả và đặt vào thuộc tính password của đối tượng User
                 user.setRoleId(rs.getLong("role_id")); // Lấy giá trị cột "role_id" từ kết quả và đặt vào thuộc tính roleId của đối tượng User
             }
         } catch (SQLException e) {

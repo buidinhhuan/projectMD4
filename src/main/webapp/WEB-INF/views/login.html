@@ -24,11 +24,11 @@
                         <h4 class="card-title">Login</h4>
                         <form th:action="@{/handle-login}" th:object="${login_form}" method="post">
                             <div class="form-group">
-                                <label for="email">E-Mail Address</label>
+                                <label for="email">User Name</label>
                                 <input id="email" type="text" class="form-control" th:field="*{username}"  required
                                        autofocus>
                                 <div class="invalid-feedback">
-                                    Email is invalid
+                                    username is invalid
                                 </div>
                             </div>
 

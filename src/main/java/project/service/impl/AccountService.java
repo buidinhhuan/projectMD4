@@ -55,8 +55,9 @@ public class AccountService implements IGenericService <User,Integer> {
     }
 
     @Override
-    public void save(User user) {
+    public long save(User user) {
 
+        return 0;
     }
 
     @Override

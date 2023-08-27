@@ -1,17 +1,29 @@
 package project.dto;
 
 public class FormRegisterDto {
+    private Long id;
     private String username;
     private String email;
     private String password;
+    private  boolean status = true;
 
     public FormRegisterDto() {
     }
 
-    public FormRegisterDto(String username, String email, String password) {
+    public FormRegisterDto(Long id, String username, String email, String password, boolean status) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -36,5 +48,13 @@ public class FormRegisterDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

@@ -1,28 +1,26 @@
 package project.dto;
 
-import org.springframework.validation.Errors;
-
-import java.util.Objects;
-
-public class FormLoginDto {
-    private Long id;
+public class UserLogin {
+    private  int id;
     private String username;
     private String password;
+     private  int cartId;
 
-    public FormLoginDto() {
+    public UserLogin() {
     }
 
-    public FormLoginDto(Long id, String username, String password) {
+    public UserLogin(int id, String username, String password, int cartId) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.cartId = cartId;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -40,5 +38,13 @@ public class FormLoginDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 }

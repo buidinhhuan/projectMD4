@@ -121,4 +121,15 @@ a{
   justify-content: end;
   gap: 20%;
 }
-
+.modal-content .form-group{
+ padding: 0px 20px;
+}
+.modal-dialog .modal-content {
+  height: 50%;
+}
+.name-pro {
+  white-space: nowrap;     /* Ngăn chữ xuống dòng */
+  overflow: hidden;        /* Ẩn phần vượt quá kích thước container */
+  text-overflow: ellipsis; /* Hiển thị dấu ba chấm ở cuối */
+  max-width: 250px;        /* Điều chỉnh kích thước tối đa cho phù hợp với mục tiêu của bạn */
+}
