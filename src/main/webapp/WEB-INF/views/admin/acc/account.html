@@ -30,7 +30,7 @@
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
             <a class="sidebar-brand" href="index.html">
-                <span class="align-middle">AdminKit</span>
+                <span class="align-middle">Admin</span>
             </a>
 
             <ul class="sidebar-nav">
@@ -222,22 +222,19 @@
                         </a>
 
                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                            <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall"/>
-                            <span class="text-dark">Chris Hung</span>
+                            <img src="https://scontent.fhan4-1.fna.fbcdn.net/v/t39.30808-6/312622124_3261695034144997_4820840115386696616_n.jpg?stp=dst-jpg_s552x414&_nc_cat=105&ccb=1-7&_nc_sid=da31f3&_nc_ohc=POrqDkiYE3cAX-fpctw&_nc_ht=scontent.fhan4-1.fna&oh=00_AfBYeGoUQ-Lwk9IPtbCjy58zfqulf2GMcBjUEFCp2403zQ&oe=64EF87FE" class="avatar img-fluid rounded me-1" alt="Charles Hall"/>
+                            <span class="text-dark">Huan Rose</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i>
+                                Profile</a>
                             <a class="dropdown-item" href="#"><i class="align-middle me-1"
-                                                                 data-feather="user"></i> Profile</a>
-                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i>
-                                Analytics</a>
+                                                                 data-feather="pie-chart"></i>
+                                Change Pass</a>
+
+
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.html"><i class="align-middle me-1"
-                                                                          data-feather="settings"></i> Settings &
-                                Privacy</a>
-                            <a class="dropdown-item" href="#"><i class="align-middle me-1"
-                                                                 data-feather="help-circle"></i> Help Center</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <a class="dropdown-item" th:href="@{/logout}">Log out</a>
                         </div>
                     </li>
                 </ul>
@@ -252,10 +249,6 @@
                         <h3 class="card-title">Demo Product Table</h3>
                         <nav class="navbar navbar-expand-lg bg-light">
                             <div class="container-fluid">
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#addModal">+ Add new Product
-                                </button>
-
                                 <form class="d-flex" role="search">
                                     <input class="form-control me-2 fst-italic" type="search"
                                            placeholder="Enter product's name... "

@@ -9,6 +9,14 @@
 body{
     line-height: 1.5;
 }
+.Add-To-Cart{
+    border-radius: 20px;
+    border: none;
+    border: 1px solid;
+     text-decoration: none;
+    color:#256eff;
+    padding: 5px;
+}
 .card-wrapper{
     max-width: 1100px;
     margin: 0 auto;

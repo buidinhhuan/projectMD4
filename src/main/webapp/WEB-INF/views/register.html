@@ -14,16 +14,17 @@
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
-						<img src="./assets/img/logo.jpg" alt="logo">
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ02M6r_DkfhgiPZwX5DkyZNuTQ2qH4tqEvYw&usqp=CAU" alt="logo">
 					</div>
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Register</h4>
+							<p style="color:red;" th:text="${session.check}"></p>
 							<form th:action="@{/handle-register}" th:object="${register_form}" method="post">
 								<div class="form-group">
 									<label for="name">Name</label>
 									<input id="name" type="text" class="form-control" th:field="*{username}" required autofocus>
-									<div class="invalid-feedback">
+									<div class="invalid-feedback" th:text="${check}">
 										What's your name?
 									</div>
 								</div>
@@ -47,7 +48,7 @@
 								<div class="form-group">
 									<div class="custom-checkbox custom-control">
 										<input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
-										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and Conditions</a></label>
+										<label for="agree" class="custom-control-label">I agree to the <a href="reset">Terms and Conditions</a></label>
 										<div class="invalid-feedback">
 											You must agree with our Terms and Conditions
 										</div>

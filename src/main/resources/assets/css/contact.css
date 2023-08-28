@@ -2,7 +2,11 @@ body {
   overflow-x: hidden;
 }
 
- 
+.container .logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
 
 .transform {
   -webkit-transform: translateX(0%);

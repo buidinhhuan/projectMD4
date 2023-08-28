@@ -55,6 +55,6 @@ public class OrderController {
         newOrder.setStatus(userLogin.isStatus()); // Hoặc bạn có thể đặt giá trị khác tùy theo logic của bạn
         newOrder.setBuyDate(new Date());
         orderService.save(newOrder);
-        return "redirect:order/history";
+        return "redirect:/order/history";
     }
 }

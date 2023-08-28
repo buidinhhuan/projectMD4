@@ -13,6 +13,7 @@ public class OrderService  implements IGenericService<Order ,Integer> {
     private final String FINDALL = "SELECT * FROM ORDERS";
     private final String INSERT = "INSERT INTO ORDERS(id_user, phoneNumber, address,totalPrice, status, dateBuy) VALUES (?, ?, ?, ?, ?, ?)";
     private final String FIND_BY_USER_ID = "SELECT * FROM ORDERS WHERE id_user = ?";
+    private final String HISTORY = "SELECT * FROM ORDERS WHERE id_user = ?";
     public List<Order> findByUserId(int userId) {
         List<Order> list = new ArrayList<>();
         Connection conn = null;

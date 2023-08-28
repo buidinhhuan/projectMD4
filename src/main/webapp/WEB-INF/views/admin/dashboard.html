@@ -28,7 +28,7 @@
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
             <a class="sidebar-brand" href="index.html">
-                <span class="align-middle">AdminKit</span>
+                <span class="align-middle">Admin</span>
             </a>
 
             <ul class="sidebar-nav">
@@ -77,9 +77,9 @@
 
                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                            data-bs-toggle="dropdown">
-                            <img th:src="@{/img/avatars/avatar.jpg}" class="avatar img-fluid rounded me-1"
+                            <img src=" https://scontent.fhan4-1.fna.fbcdn.net/v/t39.30808-6/312622124_3261695034144997_4820840115386696616_n.jpg?stp=dst-jpg_s552x414&_nc_cat=105&ccb=1-7&_nc_sid=da31f3&_nc_ohc=POrqDkiYE3cAX-fpctw&_nc_ht=scontent.fhan4-1.fna&oh=00_AfBYeGoUQ-Lwk9IPtbCjy58zfqulf2GMcBjUEFCp2403zQ&oe=64EF87FE" class="avatar img-fluid rounded me-1"
                                  alt="Charles Hall" />
-                            <span class="text-dark">Chris Hung</span>
+                            <span class="text-dark" th:text="${session.userlogin.username}"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i>
@@ -90,7 +90,7 @@
 
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <a class="dropdown-item" th:href="@{/logout}">Log out</a>
                         </div>
                     </li>
                 </ul>

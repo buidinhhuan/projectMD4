@@ -1,6 +1,7 @@
 package project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import project.dto.FormLoginDto;
@@ -31,11 +32,12 @@ public class HomeController {
         return new ModelAndView("login","login_form",new FormLoginDto());
     }
     @PostMapping("/handle-login")
-    public String handleLogin(HttpSession session, @ModelAttribute("login_form") FormLoginDto formLoginDto){
+    public String handleLogin(HttpSession session, @ModelAttribute("login_form") FormLoginDto formLoginDto,Model model){
         // checkk validate
          // tao mois user
         User user = userService.login(formLoginDto);
         if(user == null) {
+             session.setAttribute("check","tài khoản mật khât không đúng");
             return "redirect:/form-login";
         }
         session.setAttribute("userlogin",user);
@@ -44,7 +46,7 @@ public class HomeController {
             return "redirect:/admin";
         }
         if (user != null && user.isStatus()==false){
-            System.err.println("tai khoan cua ban da bi khoa");
+            session.setAttribute("check","tài khoản đã bị khoá");
             return  "redirect:/form-register";
         }
         session.setAttribute("cart",new ArrayList<>());
@@ -62,7 +64,7 @@ public class HomeController {
         return new ModelAndView("register","register_form",new FormRegisterDto());
     }
     @PostMapping("/handle-register")
-    public String handleRegister(HttpSession session, @ModelAttribute("register_form") FormRegisterDto formRegisterDto){
+    public String handleRegister(HttpSession session, @ModelAttribute("register_form") FormRegisterDto formRegisterDto, Model model){
         // checkk validate
         // tao mois user
 
@@ -72,8 +74,10 @@ public class HomeController {
             System.out.println("Bạn đã tạo tài khoản thành công");
             return "redirect:/form-login";
         }
-            System.err.println("tài khoản đã tồn tại");
-            // lỗi
+        if (user.getUsername()!=null){
+        session.setAttribute("check","tài khoản đã tồn tại");
+        }
+             // lỗi
             return "redirect:/form-register";
 
     }

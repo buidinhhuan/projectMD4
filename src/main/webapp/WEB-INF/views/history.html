@@ -73,7 +73,7 @@
                      <li><a href="#">Đã huỷ</a></li>
                      <li><a href="#">Trả hàng / Hoàn tiền</a></li>
                 </ul>
-                <div class="products" th:each="o : ${orders}">
+                <div class="products" th:each=" o : ${orders}">
                     <div class="list-product">
                         <div class="item">
                             <div class="info-item">
@@ -87,11 +87,11 @@
                                      <div>price : 100 $</div>
                                 </div>
                             </div>
-                            <div class="status" th:field="${o.status}" ></div>
+                            <div class="status" th:text="${o.status}" ></div>
                         </div>
                     </div>
                     <div class="list-btn">
-                        <div class="total-price" th:field="${o.total_price}">
+                        <div class="total-price" th:text="${o.total_price}">
                             <span>
                                 <i class="fa-solid fa-money-check-dollar"></i>
                             </span>

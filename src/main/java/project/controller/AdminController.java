@@ -27,17 +27,18 @@ public class AdminController {
     @Autowired
     private ProductService productService;
     @Autowired
-    private CatalogService  catalogService;
+    private CatalogService catalogService;
     @Autowired
     private AccountService accountService;
 
     @Value("${upload-path}")
     private String pathUpload;
+
     @GetMapping()
     public String listProduct(Model model) {
         List<Product> products = productService.findAll();
         List<Catalog> list = catalogService.findAll();
-        model.addAttribute("listCatalog",list);
+        model.addAttribute("listCatalog", list);
         model.addAttribute("products", products);
         return "admin/listProduct";
     }
@@ -46,6 +47,7 @@ public class AdminController {
     public String dashboard() {
         return "admin/dashboard";
     }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         // Xóa sản phẩm dựa trên ID
@@ -54,29 +56,47 @@ public class AdminController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") int id,Model model) {
+    public String edit(@PathVariable("id") int id, Model model) {
         Product product = productService.findById(id);
         List<Catalog> list = catalogService.findAll();
-        model.addAttribute("listCatalog",list);
-        model.addAttribute("product",product);
+        model.addAttribute("listCatalog", list);
+        model.addAttribute("product", product);
         return "admin/editProduct";
     }
+
     @PostMapping("/edit")
     public String update(@ModelAttribute("product") ProductDto productDto) {
         // Xóa sản phẩm dựa trên ID
-        File file =new File(pathUpload);
-        if(!file.exists()){
-            // chưa tồn tại folder , khởi tạo 1 folder mới
+        File file = new File(pathUpload);
+        if (!file.exists()) {
+            // chưa tồn tại folder, khởi tạo 1 folder mới
             file.mkdirs();
         }
-        String fileName = productDto.getImg_url().getOriginalFilename();
+
+        String originalFileName = productDto.getImg_url().getOriginalFilename();
+        // Lấy tên tệp gốc từ đối tượng Img_url trong ProductDto
+
+        String fileName = (originalFileName != null && !originalFileName.isEmpty()) ? originalFileName : String.valueOf(productDto.getId());
+        // Kiểm tra nếu tên tệp gốc tồn tại và không rỗng, thì sử dụng tên tệp gốc.
+        // Nếu không, sử dụng giá trị id của sản phẩm để tạo tên tệp duy nhất.
+
+
         try {
-            FileCopyUtils.copy(productDto.getImg_url().getBytes(),new File(pathUpload+fileName));
+            if (originalFileName != null && !originalFileName.isEmpty()) {
+                FileCopyUtils.copy(productDto.getImg_url().getBytes(), new File(pathUpload + fileName));
+            } else {
+                // Lấy ảnh cũ nếu không có file mới được cung cấp
+                Product existingProduct = productService.findById(productDto.getId().intValue()); // Gọi phương thức tương ứng để lấy sản phẩm hiện tại từ database
+                if (existingProduct != null) {
+                    fileName = existingProduct.getImg_url();
+                }
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         // chuyen doi thanh doi tuong video
-        Product newProduct= new Product();
+        Product newProduct = new Product();
         newProduct.setId(productDto.getId());
         newProduct.setImg_url(fileName);
         newProduct.setName(productDto.getName());
@@ -89,27 +109,28 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+
     @GetMapping("/add")
     public String upload() {
         return "admin/listProduct";
     }
 
     @PostMapping("/add")
-    public  String doUpload(@ModelAttribute ProductDto productDto){
+    public String doUpload(@ModelAttribute ProductDto productDto) {
         // upload file
-        File file =new File(pathUpload);
-        if(!file.exists()){
+        File file = new File(pathUpload);
+        if (!file.exists()) {
             // chưa tồn tại folder , khởi tạo 1 folder mới
             file.mkdirs();
         }
         String fileName = productDto.getImg_url().getOriginalFilename();
         try {
-            FileCopyUtils.copy(productDto.getImg_url().getBytes(),new File(pathUpload+fileName));
+            FileCopyUtils.copy(productDto.getImg_url().getBytes(), new File(pathUpload + fileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         // chuyen doi thanh doi tuong video
-        Product newProduct= new Product();
+        Product newProduct = new Product();
         newProduct.setImg_url(fileName);
         newProduct.setName(productDto.getName());
         newProduct.setCatalog_id(productDto.getCatalog_id());
@@ -120,7 +141,6 @@ public class AdminController {
         productService.save(newProduct);
         return "redirect:/admin";
     }
-
 
 
 //    ********************  Phần quản lý danh mục  ******************
@@ -135,7 +155,7 @@ public class AdminController {
     @GetMapping("/add_catalog")
     public ModelAndView add() {
         // Tạo ModelAndView để hiển thị form thêm mới trong view "/admin/ctl/add_catalog"
-        ModelAndView modelAndView = new ModelAndView("/admin/ctl/catalog" ,"catalog" ,new Catalog());
+        ModelAndView modelAndView = new ModelAndView("/admin/ctl/catalog", "catalog", new Catalog());
         return modelAndView;
     }
 
@@ -146,6 +166,7 @@ public class AdminController {
         // Chuyển hướng về trang danh sách danh muc
         return "redirect:/admin/catalog";
     }
+
     @GetMapping("/edit_catalog/{id}")
     public ModelAndView edit_catalog(@PathVariable("id") int id) {
         // Lấy công việc cần chỉnh sửa dựa trên ID
@@ -154,6 +175,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("/admin/ctl/edit_catalog", "catalog", catalogEdit);
         return modelAndView;
     }
+
     @PostMapping("/edit_catalog")
     public String update_catalog(@ModelAttribute("catalog") Catalog catalog) {
         // Lưu thông tin công việc đã cập nhật
@@ -161,6 +183,14 @@ public class AdminController {
         // Chuyển hướng về trang danh sách công việc
         return "redirect:/admin/catalog";
     }
+
+    @GetMapping("/delete_catalog/{id}")
+    public String delete_catalog(@PathVariable("id") int id) {
+        // Xóa sản phẩm dựa trên ID
+        catalogService.delete(id);
+        return "redirect:/admin/catalog";
+    }
+
     @GetMapping("/search_catalog")
     public String search(@RequestParam(name = "searchKeyword", required = false) String searchKeyword, Model model) {
         List<Catalog> searchResults;
@@ -181,7 +211,6 @@ public class AdminController {
     }
 
 
-
     //    ********************  Phần quản lý tài khoản  ******************
     @GetMapping("/account")
     public ModelAndView listAcc() {
@@ -189,14 +218,16 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("admin/acc/account", "account", users);
         return modelAndView;
     }
+
     @GetMapping("/unlock_acc/{id}")
-    public String unlockAcc(@PathVariable("id") Integer id){
-        accountService.updateStatusAcc(id,true);
+    public String unlockAcc(@PathVariable("id") Integer id) {
+        accountService.updateStatusAcc(id, true);
         return "redirect:/admin/account";
     }
+
     @GetMapping("/block_acc/{id}")
-    public String blockAcc(@PathVariable("id") Integer id){
-        accountService.updateStatusAcc(id,false);
+    public String blockAcc(@PathVariable("id") Integer id) {
+        accountService.updateStatusAcc(id, false);
         return "redirect:/admin/account";
     }
 }

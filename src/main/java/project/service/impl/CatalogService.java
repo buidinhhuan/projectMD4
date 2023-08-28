@@ -18,7 +18,7 @@ public class CatalogService implements IGenericService<Catalog, Integer> {
     private final String INSERT = "INSERT INTO  CATALOG( name, status) values(?,?)";
     private final String UPDATE = "UPDATE CATALOG SET name= ?,status=? where id = ?";
     private final String SEARCH = "SELECT *  FROM CATALOG WHERE name like ?";
-
+    private final String DELETE = "DELETE  FROM CATALOG WHERE id = ?";
     @Override
     public List<Catalog> findAll() {
         List<Catalog> list = new ArrayList<>();
@@ -95,9 +95,18 @@ public class CatalogService implements IGenericService<Catalog, Integer> {
 
     @Override
     public void delete(Integer id) {
-
+        Connection conn = null;
+        try {
+            conn = ConnectDB.getConnection();
+            CallableStatement callSt = conn.prepareCall(DELETE);
+            callSt.setInt(1, id);
+            callSt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            ConnectDB.closeConnection(conn);
+        }
     }
-
 
 
     public List<Catalog> searchByKeyword(String keyword) {
